@@ -54,31 +54,32 @@ YOUR ANSWER HERE
 ### Simulation 1: Gravity
 Describe how you will attempt to simulate orbital motion.
 
+We will use Gravity between two different orbs to pull these two orbs together when they move. Gravity will depend on the gravitational constant and the gravitational force formula.
+
 --- 
 
 ### Simulation 2: Spring
 Describe what your spring simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
+Between each consecutive orb, springs will be used to pull together two orbs when stretched and push apart two orbs when compressed. The spring force will depend on the string constant. It will be setup with applyForce(getGravity(orb, g_constant)).
 
 --- 
 
 ### Simulation 3: Drag
 Describe what your drag simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
+Drag will be used to dampen the motion of orbs as they travel through the space. It will be enacted through the applyForce function within the Orb class.
 
 --- 
 
 ### Simulation 4: Custom force
 Describe what your Custom force simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
+Our custom force is Electrostatic force. Each orb will be given a random charge (+/-) and will attract oppositely-charged orbs and repel same-charged orbs based on its distance from the orb. We will apply an electrostatic field and use the applyForce function within the Orb class.
 
 --- 
 
 ### Simulation 5: Combination
 Describe what your combination simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
-
+The combination of Spring, Drag, and Electrostatic force will show a mixture of attraction and repulsion from both Spring and Electrostatic. Drag will dampen the force of the other two. It will be applied with the applyForce method in the Orb class.
