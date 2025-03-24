@@ -2,7 +2,7 @@
 ## Project 00
 ### NeXTCS
 ### Period: 
-## Name0: YOUR NAME HERE
+## Name0: Devon Fung
 ## Name1: OTHER NAME HERE (delete this line if you are working solo)
 ---
 
