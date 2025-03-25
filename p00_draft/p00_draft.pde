@@ -36,8 +36,9 @@ int MOVING = 0;
 int BOUNCE = 1;
 int GRAVITY = 2;
 int DRAGF = 3;
-boolean[] toggles = new boolean[4];
-String[] modes = {"Moving", "Bounce", "Gravity", "Drag"};
+int ELECTROSTATIC = 4;
+boolean[] toggles = new boolean[5];
+String[] modes = {"Moving", "Bounce", "Gravity", "Drag", "Electrostatic"};
 
 FixedOrb earth;
 
@@ -68,6 +69,9 @@ void draw() {
     slinky.run(toggles[BOUNCE]);
   }//moving
   
+  if (toggles[ELECTROSTATIC]) {
+//    slinky.applyForce(electrostatic);
+  }
 }//draw
 
 void mousePressed() {
@@ -82,6 +86,7 @@ void keyPressed() {
   if (key == 'g') { toggles[GRAVITY] = !toggles[GRAVITY]; }
   if (key == 'b') { toggles[BOUNCE] = !toggles[BOUNCE]; }
   if (key == 'd') { toggles[DRAGF] = !toggles[DRAGF]; }
+  if (key == 'e') { toggles[ELECTROSTATIC] = !toggles[ELECTROSTATIC]; }
   if (key == '=' || key =='+') {
     slinky.addFront(new OrbNode());
   }
