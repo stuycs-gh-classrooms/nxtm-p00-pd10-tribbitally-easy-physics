@@ -43,7 +43,7 @@ What is the formula for your force? Including descriptions/definitions for the s
 
 The formula for calculating the **electrostatic force** between two charges, $\vec{F_e}$, is as follows:
 
-$\vec{F_e} = \frac{kq_1q_2}{r^2}$
+$$\vec{F_e} = \frac{kq_1q_2}{r^2}$$
 
 * $k$ is coulomb's constant, which is $8.99 * 10^9 \frac{\text{Nm}^2}{\text{C}^2}$
   
@@ -59,10 +59,7 @@ $\vec{F_e} = \frac{kq_1q_2}{r^2}$
 
 The formula for calculating the **electric field**, $\vec{E}$, is as follows:
 
-$\begin{aligned}
-	\vec{E} = \frac{kQ}{r^2}
-\end{aligned}
-$
+$$\vec{E} = \frac{kQ}{r^2}$$
 
 * $k$ is coulomb's constant, which is $ 8.99 * 10^9 \frac{\text{Nm}^2}{\text{C}^2}$
 
