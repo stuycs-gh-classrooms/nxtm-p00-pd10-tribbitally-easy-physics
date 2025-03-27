@@ -39,11 +39,11 @@ All projects will require the following:
 
 What is the formula for your force? Including descriptions/definitions for the symbols. (You may include a picture of the formula if it is not easily typed.)
 
-The formula for calculating the **electrostatic force** between two charges, $\vec{F\_e}$, is as follows:
+The formula for calculating the **electrostatic force** between two charges, $\vec{F_e}$, is as follows:
 
-$$\vec{F\_e} = \frac{kq\_1q\_2}{r^2}$$
+$$\vec{F_e} = \frac{kq_1q_2}{r^2}$$
 
-* $k$ is coulomb's constant, which is $8.99 * 10^9 \frac{\text{Nm}^2}{\text{C}^2}$
+* $k$ is coulomb's constant, which is ${8.99 * 10^9}{\frac{\text{Nm}^2}{\text{C}^2}}$
   
   * A coulomb is a unit of charge such that two objects with that charge one meter apart feel a force of $8.99 * 10^9$ Newtons.
 
@@ -53,13 +53,11 @@ $$\vec{F\_e} = \frac{kq\_1q\_2}{r^2}$$
 
 * $\vec{F_e}$ is the electrostatic force, expressed in Newtons.
 
-
-
 The formula for calculating the **electric field**, $\vec{E}$, is as follows:
 
 $$\mid\vec{E}\mid = \mid\frac{kQ}{r^2}\mid$$
 
-* $k$ is coulomb's constant, which is $8.99 * 10^9 \frac{\text{Nm}^2}{\text{C}^2}$
+* $k$ is coulomb's constant, which is ${8.99 * 10^9}{\frac{\text{Nm}^2}{\text{C}^2}}$
 
 * $Q$ is the charge creating the electric field (usually positive since $\vec{E}$ points out from positive charges, and into negative charges)
 
