@@ -95,7 +95,7 @@ Remember that the $\vec{F_e}$ points in the opposite direction as $\vec{E}$. In 
 
 Describe how you will attempt to simulate orbital motion.
 
-We will use Gravity between two different orbs to pull these two orbs together when they move. Gravity will depend on the gravitational constant and the gravitational force formula.
+We will use Gravity for the sun in the middle, which will exert a gravity force on the other orbs on the screen. Gravity will depend on the gravitational constant and the gravitational force formula.
 
 --- 
 
