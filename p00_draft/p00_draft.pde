@@ -1,12 +1,4 @@
 /* ===================================
-SpringListDriver (No Work Goes Here)
-
-This program will work similarly to SpringArrayDriver,
-but it will use a linked list of OrbNodes instead of
-an array. This driver file is complete, all your work should
-be done in the OrbList class. When working, the program can
-be controlled as follows:
-
 Keyboard commands:
   1: Create a new list of orbs in a line.
   2: Create a new list of random orbs.
