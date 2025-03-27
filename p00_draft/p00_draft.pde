@@ -34,42 +34,42 @@ String[] modes = {"Moving", "Bounce", "Gravity", "Drag", "Electrostatic"};
 
 FixedOrb earth;
 
-OrbList slinky;
+OrbList system;
 
 void setup() {
   size(600, 600);
 
   earth = new FixedOrb(width/2, height * 200, 1, 20000);
 
-  slinky = new OrbList();
-  slinky.populate(NUM_ORBS, true);
+  system = new OrbList();
+  system.populate(NUM_ORBS, true);
 }//setup
 
 void draw() {
   background(255);
   displayMode();
 
-  slinky.display();
+  system.display();
 
   if (toggles[MOVING]) {
 
-    slinky.applySprings(SPRING_LENGTH, SPRING_K);
+    system.applySprings(SPRING_LENGTH, SPRING_K);
 
     if (toggles[GRAVITY]) {
-      slinky.applyGravity(earth, GRAVITY);
+      system.applyGravity(earth, GRAVITY);
     }
-    slinky.run(toggles[BOUNCE]);
+    system.run(toggles[BOUNCE]);
   }//moving
   
   if (toggles[ELECTROSTATIC]) {
-//    slinky.applyForce(electrostatic);
+//    system.applyForce(electrostatic);
   }
 }//draw
 
 void mousePressed() {
-  OrbNode selected = slinky.getSelected(mouseX, mouseY);
+  OrbNode selected = system.getSelected(mouseX, mouseY);
   if (selected != null) {
-    slinky.removeNode(selected);
+    system.removeNode(selected);
   }
 }//mousePressed
 
@@ -80,16 +80,16 @@ void keyPressed() {
   if (key == 'd') { toggles[DRAGF] = !toggles[DRAGF]; }
   if (key == 'e') { toggles[ELECTROSTATIC] = !toggles[ELECTROSTATIC]; }
   if (key == '=' || key =='+') {
-    slinky.addFront(new OrbNode());
+    system.addFront(new OrbNode());
   }
   if (key == '-') {
-    slinky.removeFront();
+    system.removeFront();
   }
   if (key == '1') {
-    slinky.populate(NUM_ORBS, true);
+    system.populate(NUM_ORBS, true);
   }
   if (key == '2') {
-    slinky.populate(NUM_ORBS, false);
+    system.populate(NUM_ORBS, false);
   }
 }//keyPressed
 
