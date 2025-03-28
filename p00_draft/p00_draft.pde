@@ -5,7 +5,7 @@ Keyboard commands:
   =: add a new node to the front of the list
   -: remove the node at the front
   SPACE: Toggle moving on/off
-  g: Toggle earth gravity on/off
+  g: Toggle sun gravity on/off
 
 Mouse Commands:
   mousePressed: if the mouse is over an
@@ -20,6 +20,7 @@ float MIN_MASS = 10;
 float MAX_MASS = 100;
 float G_CONSTANT = 1;
 float D_COEF = 0.1;
+float K_CONSTANT = 8.9875 * pow(10,9);  //units = N*m^2/C^2
 
 int SPRING_LENGTH = 50;
 float  SPRING_K = 0.005;
@@ -32,14 +33,15 @@ int ELECTROSTATIC = 4;
 boolean[] toggles = new boolean[5];
 String[] modes = {"Moving", "Bounce", "Gravity", "Drag", "Electrostatic"};
 
-FixedOrb earth;
+FixedOrb sun;
 
 OrbList system;
 
 void setup() {
   size(600, 600);
-
-  earth = new FixedOrb(width/2, height * 200, 1, 20000);
+  
+  sun = new FixedOrb(width/2, height /2, 70, 20);
+  sun.c = color(255,150,0);
 
   system = new OrbList();
   system.populate(NUM_ORBS, true);
@@ -56,7 +58,8 @@ void draw() {
     system.applySprings(SPRING_LENGTH, SPRING_K);
 
     if (toggles[GRAVITY]) {
-      system.applyGravity(earth, GRAVITY);
+      system.applyGravity(sun, GRAVITY);
+      sun.display();
     }
     system.run(toggles[BOUNCE]);
   }//moving

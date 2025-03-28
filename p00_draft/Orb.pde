@@ -6,6 +6,7 @@ class Orb {
   PVector acceleration;
   float bsize;
   float mass;
+  float charge;  //charge in coulumbs, make sure to add - if negative charge
   color c;
 
 
@@ -131,5 +132,28 @@ class Orb {
     fill(0);
     //text(mass, center.x, center.y);
   }//display
-
+  
+  
+  
+  
+  PVector getElectrostaticForce(Orb other, float k){
+    //dont want to divide by 0!
+    PVector r = new PVector();
+    r.x = max(abs(center.x - other.center.x), MIN_SIZE);
+    r.y = max(abs(center.x - other.center.x), MIN_SIZE);
+    float q1 = charge;
+    float q2 = other.charge;
+    PVector F = new PVector();
+    F.x = (k*q1*q2)/sq(r.x);
+    F.y = (k*q1*q2)/sq(r.y);
+    return F;
+  }//getElectrostatic
+  
+  PVector electrostaticField(PVector electrostaticForce, float k){
+    PVector E = new PVector();
+    E.x = electrostaticForce.x/k;  //k is the "test charge" according to E = F/q
+    E.y = electrostaticForce.y/k;
+    return E;
+  }//electrostaticField
+  
 }//Orb
