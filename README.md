@@ -43,7 +43,7 @@ The formula for calculating the **electrostatic force** between two charges, $\v
 
 $$\vec{F_e} = \frac{kq_1q_2}{r^2}$$
 
-* $k$ is coulomb's constant, which is $8.99\cdot10^9$<span></span>$\frac{\text{Nm}^2}{\text{C}^2}$
+* $k$ is coulomb's constant, which is $8.99\cdot10^9$<span> </span>$\frac{\text{Nm}^2}{\text{C}^2}$
   
   * A coulomb is a unit of charge such that two objects with that charge one meter apart feel a force of $8.99 * 10^9$ Newtons.
 
@@ -57,7 +57,7 @@ The formula for calculating the **electric field**, $\vec{E}$, is as follows:
 
 $$\left|\vec{E}\right| = \left|\frac{kQ}{r^2}\right|$$
 
-* $k$ is coulomb's constant, which is $8.99\cdot10^9$<span></span>$\frac{\text{Nm}^2}{\text{C}^2}$
+* $k$ is coulomb's constant, which is $8.99\cdot10^9$<span> </span>$\frac{\text{Nm}^2}{\text{C}^2}$
 
 * $Q$ is the charge creating the electric field (usually positive since $\vec{E}$ points out from positive charges, and into negative charges)
 
