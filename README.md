@@ -56,8 +56,10 @@ $$\vec{F_e} = \frac{kq_1q_2}{r^{2}}$$
 The formula for calculating the **electric field**, $\vec{E}$, is as follows:
 
 $$\left|\vec{E}\right| = \left|\frac{kQ}{r^{2}}\right|$$
+<br>
 
 $k$ is coulomb's constant, which is $8.99\cdot10^{9}$ $\frac{\text{Nm}^{2}}{\text{C}^{2}}$
+<br>
 
 * $Q$ is the charge creating the electric field (usually positive since $\vec{E}$ points out from positive charges, and into negative charges)
 
