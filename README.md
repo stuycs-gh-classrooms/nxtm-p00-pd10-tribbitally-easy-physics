@@ -59,11 +59,11 @@ $$\left|\vec{E}\right| = \left|\frac{kQ}{r^{2}}\right|$$
 
 * $k$ is coulomb's constant, which is $8.99\cdot10^{9}$ $\frac{\text{Nm}^{2}}{\text{C}^{2}}$
 
-* $Q$ is the charge creating the electric field (usually positive since $\vec{E}$ points out from positive charges, and into negative charges)
+* $Q$ is the charge creating the electric field.
 
 * $r$ is the distance between a given charge that experiences $\vec{E}$, and $Q$.
 
-Remember that the $\vec{F_e}$ points in the opposite direction as $\vec{E}$. In addition, simply dividing $\vec{F_e}$ by $q$ will give you the value of $\vec{E}$.
+Remember that the $\vec{E}$ points from positive charges to negative charges. In addition, simply dividing $\vec{F_e}$ by $q$ will give you the value of $\vec{E}$.
 
 ### Custom Force
 
