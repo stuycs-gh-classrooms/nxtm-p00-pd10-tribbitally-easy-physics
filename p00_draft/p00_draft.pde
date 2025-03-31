@@ -21,6 +21,9 @@ float MAX_MASS = 100;
 float G_CONSTANT = 1;
 float D_COEF = 0.1;
 float K_CONSTANT = 8.9875 * pow(10,9);  //units = N*m^2/C^2
+float COULOMB = 1.602 * pow(10, -19);
+float MIN_CHARGE = COULOMB;
+float MAX_CHARGE = 10 * COULOMB;
 
 int SPRING_LENGTH = 50;
 float  SPRING_K = 0.005;
@@ -40,7 +43,7 @@ OrbList system;
 void setup() {
   size(600, 600);
   
-  sun = new FixedOrb(width/2, height /2, 70, 20);
+  sun = new FixedOrb(width/2, height /2, 90, 20, 0);
   sun.c = color(255,150,0);
 
   system = new OrbList();

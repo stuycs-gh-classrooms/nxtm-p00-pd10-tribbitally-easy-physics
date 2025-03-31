@@ -19,15 +19,17 @@ class Orb {
      velocity = new PVector();
      acceleration = new PVector();
      setColor();
+     charge = random (MIN_CHARGE, MAX_CHARGE);
   }
 
-  Orb(float x, float y, float s, float m) {
+  Orb(float x, float y, float s, float m, float c) {
      bsize = s;
      mass = m;
      center = new PVector(x, y);
      velocity = new PVector();
      acceleration = new PVector();
      setColor();
+     charge = c;
    }
 
   //movement behavior
@@ -123,14 +125,31 @@ class Orb {
     color c1 = color(0);
     c = lerpColor(c0, c1, (mass-MIN_SIZE)/(MAX_MASS-MIN_SIZE));
   }//setColor
-
+  
+  void setOutline() {
+    strokeWeight(10);
+    color c0 = color(255, 255, 255);
+    color c1;
+    color c2;
+    if (charge >= 0){
+      c1 = color(0, 255, 0);
+      c2 = lerpColor(c0, c1, charge/MAX_CHARGE);  //makes it a shade of green if a positive charge
+    }
+    else{
+      c1 = color(255, 0 , 0);
+      c2 = lerpColor(c0, c1, charge/MIN_CHARGE);  //makes it a shade of red if a negative charge
+    }
+    stroke(c2);
+  }
+    
   //visual behavior
   void display() {
-    noStroke();
+    setOutline();
     fill(c);
     circle(center.x, center.y, bsize);
     fill(0);
     //text(mass, center.x, center.y);
+    
   }//display
   
   

@@ -6,8 +6,8 @@ class OrbNode extends Orb {
   OrbNode() {
     next = previous = null;
   }//default constructor
-  OrbNode(float x, float y, float s, float m) {
-    super(x, y, s, m);
+  OrbNode(float x, float y, float s, float m, float c) {
+    super(x, y, s, m, c);
     next = previous = null;
   }//constructor
 

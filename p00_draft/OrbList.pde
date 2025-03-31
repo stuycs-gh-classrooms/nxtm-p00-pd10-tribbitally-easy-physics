@@ -32,7 +32,7 @@ class OrbList {
     front = null;  //clears the list
     for (int i = 0; i < n; i++){
       if (ordered){
-        addFront(new OrbNode(SPRING_LENGTH*(i+1), height/2, random(MIN_SIZE, MAX_SIZE), random(MIN_MASS, MAX_MASS))); 
+        addFront(new OrbNode(SPRING_LENGTH*(i+1), height/2, random(MIN_SIZE, MAX_SIZE), random(MIN_MASS, MAX_MASS), random(MIN_CHARGE, MAX_CHARGE))); 
       }
       else{
         addFront(new OrbNode());
