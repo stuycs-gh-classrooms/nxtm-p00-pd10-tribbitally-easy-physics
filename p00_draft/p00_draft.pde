@@ -22,7 +22,7 @@ float G_CONSTANT = 1;
 float D_COEF = 0.1;
 float K_CONSTANT = 8.9875 * pow(10,9);  //units = N*m^2/C^2
 float COULOMB = 1.602 * pow(10, -19);
-float MIN_CHARGE = COULOMB;
+float MIN_CHARGE = -10 *COULOMB;
 float MAX_CHARGE = 10 * COULOMB;
 
 int SPRING_LENGTH = 50;
@@ -68,7 +68,7 @@ void draw() {
   }//moving
   
   if (toggles[ELECTROSTATIC]) {
-//    system.applyForce(electrostatic);
+    system.applyElectrostatic(K_CONSTANT);
   }
 }//draw
 

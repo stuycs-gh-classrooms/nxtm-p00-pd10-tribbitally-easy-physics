@@ -65,6 +65,20 @@ class OrbList {
     }
 
   }//applyGravity
+  
+  
+  void applyElectrostatic(float kconstant){
+    OrbNode current = front;
+    OrbNode toCompare = front;
+    while (current != null){
+      while (toCompare != null){
+        current.applyForce(current.getElectrostaticForce(toCompare, kconstant));
+        toCompare = toCompare.next;
+      }
+      current = current.next;
+    }
+  }
+  
 
   void run(boolean boucne) {
     OrbNode current = front;

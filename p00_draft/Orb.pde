@@ -127,7 +127,7 @@ class Orb {
   }//setColor
   
   void setOutline() {
-    strokeWeight(10);
+    strokeWeight(5);
     color c0 = color(255, 255, 255);
     color c1;
     color c2;
