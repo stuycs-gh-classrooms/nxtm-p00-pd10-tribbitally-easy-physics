@@ -165,6 +165,7 @@ class Orb {
     PVector F = new PVector();
     F.x = (k*q1*q2)/sq(r.x);
     F.y = (k*q1*q2)/sq(r.y);
+      println(F);
     return F;
   }//getElectrostatic
   
