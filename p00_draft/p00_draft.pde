@@ -81,8 +81,8 @@ void mousePressed() {
 
 void keyPressed() {
   if (key == ' ') { toggles[MOVING] = !toggles[MOVING]; }
-  if (key == 'g') { toggles[GRAVITY] = !toggles[GRAVITY]; }
   if (key == 'b') { toggles[BOUNCE] = !toggles[BOUNCE]; }
+  if (key == 'g') { toggles[GRAVITY] = !toggles[GRAVITY]; }
   if (key == 'd') { toggles[DRAGF] = !toggles[DRAGF]; }
   if (key == 'e') { toggles[ELECTROSTATIC] = !toggles[ELECTROSTATIC]; }
   if (key == '=' || key =='+') {
