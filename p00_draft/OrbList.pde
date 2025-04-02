@@ -66,14 +66,25 @@ class OrbList {
 
   }//applyGravity
   
+  void applyDrag(float coef){
+    OrbNode current = front;
+    while (current != null){
+      current.applyForce(current.getDragForce(coef));
+      current = current.next;  //loop through each item in the list and get the gravity to use in applyForce
+    }
+  }//applyDrag
+
+  
   
   void applyElectrostatic(float kconstant){
     OrbNode current = front;
-    OrbNode toCompare = front;
     while (current != null){
+      OrbNode toCompare = front;
       while (toCompare != null){
-        current.applyForce(current.getElectrostaticForce(toCompare, kconstant));
-        toCompare = toCompare.next;
+        if (current != toCompare) { // Avoid self-interaction
+          current.applyForce(current.getElectrostaticForce(toCompare, kconstant));
+          toCompare = toCompare.next;
+        }
       }
       current = current.next;
     }
