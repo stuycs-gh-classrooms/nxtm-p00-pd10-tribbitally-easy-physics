@@ -1,18 +1,3 @@
-/* ===================================
-Keyboard commands:
-  1: Create a new list of orbs in a line.
-  2: Create a new list of random orbs.
-  =: add a new node to the front of the list
-  -: remove the node at the front
-  SPACE: Toggle moving on/off
-  g: Toggle sun gravity on/off
-
-Mouse Commands:
-  mousePressed: if the mouse is over an
-    orb, remove it from the list.
-=================================== */
-
-
 int NUM_ORBS = 10;
 int MIN_SIZE = 10;
 int MAX_SIZE = 60;
@@ -26,7 +11,7 @@ float MIN_CHARGE = -10 *COULOMB;
 float MAX_CHARGE = 10 * COULOMB;
 
 int SPRING_LENGTH = 50;
-float  SPRING_K = 0.005;
+float SPRING_K = 0.005;
 
 int MOVING = 0;
 int BOUNCE = 1;
