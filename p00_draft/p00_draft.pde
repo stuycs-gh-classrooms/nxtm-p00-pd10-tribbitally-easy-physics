@@ -6,7 +6,7 @@ float MAX_MASS = 100;
 float G_CONSTANT = 1;
 float D_COEF = 0.1;
 float K_CONSTANT = 8.9875 * pow(10,9);  //units = N*m^2/C^2
-float COULOMB = 1.602 * pow(10, -19);
+float COULOMB = 1.602 * pow(10, -5); //a real coulomb is 10 ^-19 but it's too small to show any movement
 float MIN_CHARGE = -10 *COULOMB;
 float MAX_CHARGE = 10 * COULOMB;
 
@@ -15,11 +15,13 @@ float SPRING_K = 0.005;
 
 int MOVING = 0;
 int BOUNCE = 1;
-int GRAVITY = 2;
-int DRAGF = 3;
-int ELECTROSTATIC = 4;
-boolean[] toggles = new boolean[5];
-String[] modes = {"Moving", "Bounce", "Gravity", "Drag", "Electrostatic"};
+int SIM1 = 2;
+int SIM2 = 3;
+int SIM3 = 4;
+int SIM4 = 5;
+int SIM5 = 6;
+boolean[] toggles = new boolean[7];
+String[] modes = {"Moving", "Bounce", "Sim 1", "Sim 2", "Sim 3", "Sim 4", "Sim 5"};
 
 FixedOrb sun;
 
@@ -43,18 +45,30 @@ void draw() {
 
   if (toggles[MOVING]) {
 
-    system.applySprings(SPRING_LENGTH, SPRING_K);
-
-    if (toggles[GRAVITY]) {
-      system.applyGravity(sun, GRAVITY);
+    if (toggles[SIM1]) {
+      system.applyGravity(sun, G_CONSTANT);
       sun.display();
+    }
+    
+    if (toggles[SIM2]) {
+      system.applySprings(SPRING_LENGTH, SPRING_K);
+    }
+    
+    if (toggles[SIM3]) {
+      system.applyDrag(D_COEF);
+    }
+    if (toggles[SIM4]) {
+      system.applyElectrostatic(K_CONSTANT);
+      sun.display();
+    }
+    if (toggles[SIM5]) {
+      system.applySprings(SPRING_LENGTH, SPRING_K);
+      system.applyDrag(D_COEF);
+      system.applyElectrostatic(K_CONSTANT);
     }
     system.run(toggles[BOUNCE]);
   }//moving
   
-  if (toggles[ELECTROSTATIC]) {
-    system.applyElectrostatic(K_CONSTANT);
-  }
 }//draw
 
 void mousePressed() {
@@ -66,20 +80,47 @@ void mousePressed() {
 
 void keyPressed() {
   if (key == ' ') { toggles[MOVING] = !toggles[MOVING]; }
-  if (key == 'g') { toggles[GRAVITY] = !toggles[GRAVITY]; }
   if (key == 'b') { toggles[BOUNCE] = !toggles[BOUNCE]; }
-  if (key == 'd') { toggles[DRAGF] = !toggles[DRAGF]; }
-  if (key == 'e') { toggles[ELECTROSTATIC] = !toggles[ELECTROSTATIC]; }
+  if (key == '1') { 
+    for (int i = 0; i < toggles.length; i++){
+      toggles[i] = false;
+    }
+    toggles[SIM1] = true;
+  }
+  if (key == '2') { 
+    for (int i = 0; i < toggles.length; i++){
+      toggles[i] = false;
+    }
+    toggles[SIM2] = true;
+  }
+  if (key == '3') { 
+    for (int i = 0; i < toggles.length; i++){
+      toggles[i] = false;
+    }
+    toggles[SIM3] = true;
+  }
+  if (key == '4') { 
+    for (int i = 0; i < toggles.length; i++){
+      toggles[i] = false;
+    }
+    toggles[SIM4] = true;
+  }
+  if (key == '5') { 
+    for (int i = 0; i < toggles.length; i++){
+      toggles[i] = false;
+    }
+    toggles[SIM5] = true;
+  }
   if (key == '=' || key =='+') {
     system.addFront(new OrbNode());
   }
   if (key == '-') {
     system.removeFront();
   }
-  if (key == '1') {
+  if (key == 'q') {
     system.populate(NUM_ORBS, true);
   }
-  if (key == '2') {
+  if (key == 'w') {
     system.populate(NUM_ORBS, false);
   }
 }//keyPressed
