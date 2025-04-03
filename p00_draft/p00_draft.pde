@@ -40,14 +40,16 @@ void setup() {
 void draw() {
   background(255);
   displayMode();
-
-  system.display();
-
+  
+  boolean ifSpring = toggles[SIM2] || toggles[SIM5];
+  system.display(ifSpring);
+  if (toggles[SIM1]) {
+    sun.display();
+  }
   if (toggles[MOVING]) {
 
     if (toggles[SIM1]) {
       system.applyGravity(sun, G_CONSTANT);
-      sun.display();
     }
     
     if (toggles[SIM2]) {
@@ -59,7 +61,6 @@ void draw() {
     }
     if (toggles[SIM4]) {
       system.applyElectrostatic(K_CONSTANT);
-      sun.display();
     }
     if (toggles[SIM5]) {
       system.applySprings(SPRING_LENGTH, SPRING_K);

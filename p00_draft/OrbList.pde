@@ -40,10 +40,10 @@ class OrbList {
     }  //makes orbs according to ordered
   }//populate
 
-  void display() {
+  void display(boolean ifSpring) {
     OrbNode current = front;
     while (current != null){
-      current.display();
+      current.display(ifSpring);
       current = current.next;  //loop through each item in the list and call display()
     }
   }//display
@@ -82,9 +82,10 @@ class OrbList {
       OrbNode toCompare = front;
       while (toCompare != null){
         if (current != toCompare) { // Avoid self-interaction
+          println("ok");
           current.applyForce(current.getElectrostaticForce(toCompare, kconstant));
-          toCompare = toCompare.next;
         }
+        toCompare = toCompare.next;
       }
       current = current.next;
     }
