@@ -158,17 +158,15 @@ class Orb {
   PVector getElectrostaticForce(Orb other, float k){
     //dont want to divide by 0!
     PVector r = new PVector(center.x - other.center.x, center.y - other.center.y);
-    r.x = max(abs(r.x), MIN_SIZE);
-    r.y = max(abs(r.y), MIN_SIZE);
+    float distance = max(r.mag(), MIN_SIZE);
+    float distanceSquared = distance * distance;
     
     float q1 = charge;
     float q2 = other.charge;
     
-    float distanceSquared = sq(r.mag());
-    PVector F = new PVector();
-    F.x = (k * q1 * q2) / distanceSquared * r.x / r.mag();
-    F.y = (k * q1 * q2) / distanceSquared * r.y / r.mag();
-      println(F);
+    //Coulomb's Law: F = k * q1 * q2 / r^2 * direction
+    PVector F = r.copy().normalize();
+    F.mult((k * q1 * q2) / distanceSquared);
     return F;
   }//getElectrostatic
   

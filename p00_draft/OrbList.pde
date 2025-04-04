@@ -82,7 +82,6 @@ class OrbList {
       OrbNode toCompare = front;
       while (toCompare != null){
         if (current != toCompare) { // Avoid self-interaction
-          println("ok");
           current.applyForce(current.getElectrostaticForce(toCompare, kconstant));
         }
         toCompare = toCompare.next;
