@@ -93,7 +93,7 @@ Remember that the $\vec{E}$ points from positive charges to negative charges. In
 
 Describe how you will attempt to simulate orbital motion.
 
-There will be a sun (`FixedOrb`) in the middle, which will exert a gravitational force between the "orbiting" orbs. This simulation will use an array of orbs. The gravitational force formula ($\vec{F_g} &=$ $\frac{Gm_1m_2}{r^2}\hat{AB}$) will be used to calculate the force between the sun and each orb in the array.
+There will be a sun (`FixedOrb`) in the middle, which will exert a gravitational force between the "orbiting" orbs. This simulation will use an array of orbs. The gravitational force formula ($\vec{F_g} =$ $\frac{Gm_1m_2}{r^2}\hat{AB}$) will be used to calculate the force between the sun and each orb in the array.
 
 --- 
 
@@ -101,7 +101,7 @@ There will be a sun (`FixedOrb`) in the middle, which will exert a gravitational
 
 Describe what your spring simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-Between each consecutive orb, springs will be used to pull together two orb nodes when stretched and push apart two orb nodes when compressed. There will be two fixed orb nodes, each on the left and right sides of the screen. This simulation will use a linked list of orb nodes. The spring force formula ($\vec{F_{sp}} &= k\Delta x$) will be used to calculate the force between the orb nodes connected by a spring.
+Between each consecutive orb, springs will be used to pull together two orb nodes when stretched and push apart two orb nodes when compressed. There will be two fixed orb nodes, each on the left and right sides of the screen. This simulation will use a linked list of orb nodes. The spring force formula ($\vec{F_{sp}} = k\Delta x$) will be used to calculate the force between the orb nodes connected by a spring.
 
 --- 
 
@@ -109,7 +109,7 @@ Between each consecutive orb, springs will be used to pull together two orb node
 
 Describe what your drag simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-There will be two planetary systems where the drag coefficient will be different: the usual Solar System and the Alpha Centauri System. The background color will be different for each planetary system, and there will be indicators on the screen for each system. The drag coefficient will affect the drag force being exerted on each orb, since the drag force formula ($\vec{F_{drag}} &=$ $-\frac{1}{2}\cdot\left|\vec{v}\right|^{2}\cdotC_d\cdot{\hat v}$) is being used to calculate it. This simulation will use an array of orbs.
+There will be two planetary systems where the drag coefficient will be different: the usual Solar System and the Alpha Centauri System. The background color will be different for each planetary system, and there will be indicators on the screen for each system. The drag coefficient will affect the drag force being exerted on each orb, since the drag force formula ($\vec{F_{drag}} =$ $-\frac{1}{2}\cdot\left|\vec{v}\right|^{2}\cdotC_d\cdot{\hat v}$) is being used to calculate it. This simulation will use an array of orbs.
 
 --- 
 
