@@ -93,7 +93,7 @@ Remember that the $\vec{E}$ points from positive charges to negative charges. In
 
 Describe how you will attempt to simulate orbital motion.
 
-We will use Gravity for the sun in the middle, which will exert a gravity force on the other orbs on the screen. Gravity will depend on the gravitational constant and the gravitational force formula.
+There will be a sun (`FixedOrb`) in the middle, which will exert a gravitational force between the "orbiting" orbs. This simulation will use an array of orbs. The gravitational force formula ($\vec{F_g} &=$ $\frac{Gm_1m_2}{r^2}\hat{AB}$) will be used to calculate the force between the sun and each orb in the array.
 
 --- 
 
@@ -101,7 +101,7 @@ We will use Gravity for the sun in the middle, which will exert a gravity force 
 
 Describe what your spring simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-Between each consecutive orb, springs will be used to pull together two orbs when stretched and push apart two orbs when compressed. The spring force will depend on the string constant. It will be setup with applyForce(getGravity(orb, g_constant)).
+Between each consecutive orb, springs will be used to pull together two orb nodes when stretched and push apart two orb nodes when compressed. There will be two fixed orb nodes, each on the left and right sides of the screen. This simulation will use a linked list of orb nodes. The spring force formula ($\vec{F_{sp}} &= k\Delta x$) will be used to calculate the force between the orb nodes connected by a spring.
 
 --- 
 
@@ -109,7 +109,7 @@ Between each consecutive orb, springs will be used to pull together two orbs whe
 
 Describe what your drag simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-Drag will be used to dampen the motion of orbs as they travel through the space. It will be enacted through the applyForce function within the Orb class.
+There will be two planetary systems where the drag coefficient will be different: the usual Solar System and the Alpha Centauri System. The background color will be different for each planetary system, and there will be indicators on the screen for each system. The drag coefficient will affect the drag force being exerted on each orb, since the drag force formula ($\vec{F_{drag}} &=$ $-\frac{1}{2}\cdot\left|\vec{v}\right|^{2}\cdotC_d\cdot{\hat v}$) is being used to calculate it. This simulation will use an array of orbs.
 
 --- 
 
@@ -117,7 +117,9 @@ Drag will be used to dampen the motion of orbs as they travel through the space.
 
 Describe what your Custom force simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-Our custom force is Electrostatic force. Each orb will be given a random charge (+/-) and will attract oppositely-charged orbs and repel same-charged orbs based on its distance from the orb. We will apply an electrostatic field and use the applyForce function within the Orb class.
+Our custom force will be the electrostatic force between two charged orb nodes. Each orb node will be given a random charge (+/-) and will attract oppositely-charged orb nodes and repel same-charged orb nodes based on their distance from each other. The electrostatic force formula above will be used to calculate the force. This simulation will use a linked list of orb nodes. 
+
+In addition, when any simulation using the electrostatic force is enabled, there will be electric field lines going out and into certain charges based on what their charge is. The direction and magnitude of the electric field lines will be determined using the electric field formula above. 
 
 --- 
 
@@ -125,4 +127,5 @@ Our custom force is Electrostatic force. Each orb will be given a random charge 
 
 Describe what your combination simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-The combination of Spring, Drag, and Electrostatic force will show a mixture of attraction and repulsion from both Spring and Electrostatic. Drag will dampen the force of the other two. It will be applied with the applyForce method in the Orb class.
+Our combination simulation will combine the spring, drag, and electrostatic simulations. Like the spring simulation, there will be two fixed orb node, each on the left and right sides of the screen. Except since the drag simulation is involved now, each fixed orb node will be in a
+different planetary system, with the connected orb nodes to that fixed orb node experiencing a different drag force due to the drag coefficient being different for each. The electrostatic force between the orb nodes will be applied as usual. Electric field lines will also be present and act as another visual, just like the electrostatic force simulation. This simulation will use a linked list of orbs (since the three which are being combined already use a linked list).
