@@ -1,5 +1,4 @@
-class OrbList {
-
+class OrbList { // OrbList class that will control behavior of a linked list of orb nodes
   OrbNode front;
 
   OrbList() {
@@ -13,22 +12,11 @@ class OrbList {
     else{
       front.previous = o;
       o.next = front;
-      front = front.previous;  //if there are nodes, add another node to front and reassign front
+      front = front.previous; //if there are nodes, add another node to front and reassign front
     }
 
   }//addFront
-
-
   void populate(int n, boolean ordered) {
-    /*while (front != null){
-      if (front.next == null){
-        front = null;
-      }
-      else{
-        front = front.next;
-        front.previous = null;
-      }
-    }*/
     front = null;  //clears the list
     for (int i = 0; i < n; i++){
       if (ordered){
@@ -37,7 +25,7 @@ class OrbList {
       else{
         addFront(new OrbNode());
       }
-    }  //makes orbs according to ordered
+    } //makes orbs according to ordered
   }//populate
 
   void display(boolean ifSpring) {
@@ -54,7 +42,6 @@ class OrbList {
       current.applySprings(springLength, springK);
       current = current.next;  //loop through each item in the list and call applySprings
     }
-
   }//applySprings
 
   void applyGravity(Orb other, float gConstant) {
@@ -63,7 +50,6 @@ class OrbList {
       current.applyForce(current.getGravity(other, gConstant));
       current = current.next;  //loop through each item in the list and get the gravity to use in applyForce
     }
-
   }//applyGravity
   
   void applyDrag(float coef){
@@ -73,16 +59,14 @@ class OrbList {
       current = current.next;  //loop through each item in the list and get the gravity to use in applyForce
     }
   }//applyDrag
-
   
-  
-  void applyElectrostatic(float kconstant){
+  void applyElectrostatic(float kConstant){
     OrbNode current = front;
     while (current != null){
       OrbNode toCompare = front;
       while (toCompare != null){
         if (current != toCompare) { // Avoid self-interaction
-          current.applyForce(current.getElectrostaticForce(toCompare, kconstant));
+          current.applyForce(current.getElectrostaticForce(toCompare, kConstant));
         }
         toCompare = toCompare.next;
       }
@@ -90,14 +74,12 @@ class OrbList {
     }
   }
   
-
-  void run(boolean boucne) {
+  void run(boolean bounce) {
     OrbNode current = front;
     while (current != null){
-      current.move(boucne);
-      current = current.next;  ////loop through each item in the list and call move
+      current.move(bounce);
+      current = current.next;  //loop through each item in the list and call move
     }
-
   }//run
 
   void removeFront() {
@@ -109,8 +91,6 @@ class OrbList {
       front = null;
     }  //if front exists and front.next doesn't (ie front is the only item), make front null
   }//removeFront
-
-
   
   OrbNode getSelected(int x, int y) {
     OrbNode current = front;
@@ -139,7 +119,6 @@ class OrbList {
             front = null;
             current = null;
           }  //if front is the only item, just make front null
-          
         }
         else if (current.previous != null && current.next != null){
           current.previous.next = current.next;

@@ -6,7 +6,7 @@ class Orb {
   PVector acceleration;
   float bsize;
   float mass;
-  float charge;  //charge in coulumbs, make sure to add - if negative charge
+  float charge; // charge in coulumbs, make sure to add - if negative charge
   color c;
 
 
@@ -19,7 +19,7 @@ class Orb {
      velocity = new PVector();
      acceleration = new PVector();
      setColor();
-     charge = random (MIN_CHARGE, MAX_CHARGE);
+     charge = random(MIN_CHARGE, MAX_CHARGE);
   }
 
   Orb(float x, float y, float s, float m, float c) {
@@ -82,13 +82,30 @@ class Orb {
     return direction;
   }//getSpring
 
+  PVector getElectrostaticForce(Orb other, float k){
+    float strength = k * charge * other.charge; // calculate the strength of the electrostatic force
+    PVector r = new PVector(center.x - other.center.x, center.y - other.center.y); // create a new vector representative of the distance between the two orbs
+    float distance = max(r.mag(), MIN_SIZE); // don't want to divide by 0, so we set the minimum distance to the minimum size
+    strength = strength/pow(distance, 2); // divide the strength by the distance squared
+    PVector Fe = r.copy().normalize(); // create a new vector that has a magnitude of 1 (copied from the distance vector)
+    Fe.mult(strength); // calculate the electrostatic force by multiplying the strength by the newly created vector
+    return Fe;
+  }//getElectrostatic
+  
+  PVector electrostaticField(PVector electrostaticForce, float k){
+    PVector E = new PVector();
+    E.x = electrostaticForce.x/k;  //k is the "test charge" according to E = F/q
+    E.y = electrostaticForce.y/k;
+    return E;
+  }//electrostaticField
+  
   boolean yBounce(){
     if (center.y > height - bsize/2) {
       velocity.y *= -1;
       center.y = height - bsize/2;
-
       return true;
     }//bottom bounce
+    
     else if (center.y < bsize/2) {
       velocity.y*= -1;
       center.y = bsize/2;
@@ -96,6 +113,7 @@ class Orb {
     }
     return false;
   }//yBounce
+  
   boolean xBounce() {
     if (center.x > width - bsize/2) {
       center.x = width - bsize/2;
@@ -128,18 +146,23 @@ class Orb {
   
   void setOutline() {
     strokeWeight(5);
-    color c0 = color(255, 255, 255);
-    color c1;
-    color c2;
-    if (charge >= 0){
-      c1 = color(0, 255, 0);
-      c2 = lerpColor(c0, c1, charge/MAX_CHARGE);  //makes it a shade of green if a positive charge
+    if (simToggles[electrostaticSim] || simToggles[combinationSim]) { // set each orb's stroke color based on their charge if electrostatic or combination is on
+      color c0 = color(255, 255, 255);
+      color c1;
+      color c2;
+      if (charge >= 0) {
+        c1 = color(0, 255, 0);
+        c2 = lerpColor(c0, c1, charge/MAX_CHARGE);  //makes it a shade of green if a positive charge
+      }
+      else {
+        c1 = color(255, 0 , 0);
+        c2 = lerpColor(c0, c1, charge/MIN_CHARGE);  //makes it a shade of red if a negative charge
+      }
+      stroke(c2);
     }
-    else{
-      c1 = color(255, 0 , 0);
-      c2 = lerpColor(c0, c1, charge/MIN_CHARGE);  //makes it a shade of red if a negative charge
+    else { // for other simulations, set each orb's stroke color to white (since the background is black and there are dark-colored orbs, making them easier to see)
+      stroke(255);
     }
-    stroke(c2);
   }
     
   //visual behavior
@@ -147,34 +170,5 @@ class Orb {
     setOutline();
     fill(c);
     circle(center.x, center.y, bsize);
-    fill(0);
-    //text(mass, center.x, center.y);
-    
   }//display
-  
-  
-  
-  
-  PVector getElectrostaticForce(Orb other, float k){
-    //dont want to divide by 0!
-    PVector r = new PVector(center.x - other.center.x, center.y - other.center.y);
-    float distance = max(r.mag(), MIN_SIZE);
-    float distanceSquared = distance * distance;
-    
-    float q1 = charge;
-    float q2 = other.charge;
-    
-    //Coulomb's Law: F = k * q1 * q2 / r^2 * direction
-    PVector F = r.copy().normalize();
-    F.mult((k * q1 * q2) / distanceSquared);
-    return F;
-  }//getElectrostatic
-  
-  PVector electrostaticField(PVector electrostaticForce, float k){
-    PVector E = new PVector();
-    E.x = electrostaticForce.x/k;  //k is the "test charge" according to E = F/q
-    E.y = electrostaticForce.y/k;
-    return E;
-  }//electrostaticField
-  
 }//Orb

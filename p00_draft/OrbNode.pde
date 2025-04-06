@@ -43,8 +43,5 @@ class OrbNode extends Orb {
       PVector sforce = getSpring(previous, springLength, springK);
       applyForce(sforce);
     }
-  }///applySprings
-
-
-
+  }//applySprings
 }//OrbNode
