@@ -53,18 +53,6 @@ $$\vec{F_e} = \frac{kq_1q_2}{r^{2}}$$
 
 * $\vec{F_e}$ is the electrostatic force, expressed in Newtons.
 
-The formula for calculating the **electric field**, $\vec{E}$, is as follows:
-
-$$\left|\vec{E}\right| = \left|\frac{kQ}{r^{2}}\right|$$
-
-* $k$ is coulomb's constant, which is $8.99\cdot10^{9}$ $\frac{\text{Nm}^{2}}{\text{C}^{2}}$
-
-* $Q$ is the charge creating the electric field.
-
-* $r$ is the distance between a given charge that experiences $\vec{E}$, and $Q$.
-
-Remember that the $\vec{E}$ points from positive charges to negative charges. In addition, simply dividing $\vec{F_e}$ by $q$ will give you the value of $\vec{E}$.
-
 ### Custom Force
 
 - What information that is already present in the `Orb` or `OrbNode` classes does this force use?
@@ -73,11 +61,11 @@ Remember that the $\vec{E}$ points from positive charges to negative charges. In
 
 - Does this force require any new constants, if so what are they and what values will you try initially?
   
-  - This force requires $k$, coulomb's constant, and the charges of the orbs, each expressed as $q$. The values of these constants are already explained in the equations above.
+  - This force requires $k$, coulomb's constant, and the charges of the orbs, each expressed as $q$. The values of these constants are already explained in the equation above, so we will use the actual values in our project.
 
 - Does this force require any new information to be added to the `Orb` class? If so, what is it and what data type will you use?
   
-  - It requires that the orbs now have their own charges. We can simply use the `int` variable type to store the values of these charges, since they'll either be positive or negative.
+  - It requires that the orbs now have their own charges. We can simply use the `float` variable type to store the values of these charges, since they'll either be positive or negative.
 
 - Does this force interact with other `Orbs`, or is it applied based on the environment?
   
@@ -93,7 +81,9 @@ Remember that the $\vec{E}$ points from positive charges to negative charges. In
 
 Describe how you will attempt to simulate orbital motion.
 
-There will be a sun (`FixedOrb`) in the middle, which will exert a gravitational force between the "orbiting" orbs. This simulation will use an array of orbs. The gravitational force formula ($\vec{F_g} =$ $\frac{Gm_1m_2}{r^2}$ $\hat{AB}$) will be used to calculate the force between the sun and each orb in the array.
+There will be a sun (`FixedOrb`) in the middle, which will exert a gravitational force between the "orbiting" orbs. The gravitational force formula ($\vec{F_g} =$ $\frac{Gm_1m_2}{r^2}$ $\hat{AB}$) will be used to calculate the force between the sun and each orb in the array.
+
+This simulation will use an array of orbs.
 
 --- 
 
@@ -101,7 +91,9 @@ There will be a sun (`FixedOrb`) in the middle, which will exert a gravitational
 
 Describe what your spring simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-Between each consecutive orb, springs will be used to pull together two orb nodes when stretched and push apart two orb nodes when compressed. There will be two fixed orb nodes, each on the left and right sides of the screen. This simulation will use a linked list of orb nodes. The spring force formula ($\vec{F_{sp}} = k\Delta x$) will be used to calculate the force between the orb nodes connected by a spring.
+Between each consecutive orb, springs will be used to pull together two orb nodes when stretched and push apart two orb nodes when compressed. There will be two fixed orb nodes, each on the left and right sides of the screen. The spring force formula ($\vec{F_{sp}} = k\Delta x$) will be used to calculate the force between the orb nodes connected by a spring.
+
+This simulation will use a linked list of orb nodes.
 
 --- 
 
@@ -109,7 +101,9 @@ Between each consecutive orb, springs will be used to pull together two orb node
 
 Describe what your drag simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-There will be two planetary systems where the drag coefficient will be different: the usual Solar System and the Alpha Centauri System. The background color will be different for each planetary system, and there will be indicators on the screen for each system. The drag coefficient will affect the drag force being exerted on each orb, since the drag force formula ($$\vec{F}\_{drag} =$$ $$-\frac{1}{2}$$ $$\left|\vec{v}\right|^{2} C_{d} {\hat v}$$) is being used to calculate it. This simulation will use an array of orbs.
+There will be two planetary systems where the drag coefficient will be different: the usual Solar System and the Alpha Centauri System. The background color will be different for each planetary system, and there will be indicators on the screen for each system. The drag coefficient will affect the drag force being exerted on each orb, since the drag force formula ($$\vec{F}\_{drag} =$$ $$-\frac{1}{2}$$ $$\left|\vec{v}\right|^{2} C_{d} {\hat v}$$) is being used to calculate it. 
+
+This simulation will use an array of orbs.
 
 --- 
 
@@ -117,9 +111,9 @@ There will be two planetary systems where the drag coefficient will be different
 
 Describe what your Custom force simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-Our custom force will be the electrostatic force between two charged orb nodes. Each orb node will be given a random charge (+/-) and will attract oppositely-charged orb nodes and repel same-charged orb nodes based on their distance from each other. The electrostatic force formula above will be used to calculate the force. This simulation will use a linked list of orb nodes. 
+Our custom force will be the electrostatic force between two charged orb nodes. Each orb node will be given a random charge (+/-) and will attract oppositely-charged orb nodes and repel same-charged orb nodes based on their distance from each other. The electrostatic force formula above will be used to calculate the force.  
 
-In addition, when any simulation using the electrostatic force is enabled, there will be electric field lines going out and into certain charges based on what their charge is. The direction and magnitude of the electric field lines will be determined using the electric field formula above. 
+This simulation will use a linked list of orb nodes.
 
 --- 
 
@@ -131,4 +125,6 @@ Our combination simulation will combine the spring, drag, and electrostatic simu
 
 Since the drag simulation is involved now, each fixed orb node will be in a different planetary system. The connected orb nodes to that fixed orb node experiencing a different drag force due to the drag coefficient being different for each. 
 
-The electrostatic force between the orb nodes will be applied as usual. Electric field lines will also be present and act as another visual, just like the electrostatic force simulation. This simulation will use a linked list of orbs (since the three which are being combined already use a linked list).
+The electrostatic force between the orb nodes will be applied as usual. 
+
+This simulation will use a linked list of orbs.

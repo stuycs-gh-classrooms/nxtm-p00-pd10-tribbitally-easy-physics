@@ -92,13 +92,6 @@ class Orb {
     return Fe;
   }//getElectrostatic
   
-  PVector electrostaticField(PVector electrostaticForce, float k){
-    PVector E = new PVector();
-    E.x = electrostaticForce.x/k;  //k is the "test charge" according to E = F/q
-    E.y = electrostaticForce.y/k;
-    return E;
-  }//electrostaticField
-  
   boolean yBounce(){
     if (center.y > height - bsize/2) {
       velocity.y *= -1;
