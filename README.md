@@ -114,6 +114,7 @@ Describe what your Custom force simulation will look like. Explain how it will b
 Our custom force will be the electrostatic force between two charged orb nodes. Each orb node will be given a random charge (+/-) and will attract oppositely-charged orb nodes and repel same-charged orb nodes based on their distance from each other. The electrostatic force formula above will be used to calculate the force.  
 
 The amount of charge that each orb node has, whether positive or negative, will be shown through their stroke color. A green stroke means that charge is positive and a red stroke means that charge is negative. It will be coded such that the shade of the stroke depends on the amount of charge that orb node has. For example, a more saturated and dark red shade means that charge has a high negative charge. A more light and closer to neon green shade means that charge has a high positive charge. Based on this, neutral charges will have a stroke color close to white. 
+
 Orbs and orb nodes not in the electrostatic simulation (or combination simulation) will simply have a stroke color of white.
 
 This simulation will use a linked list of orb nodes.
