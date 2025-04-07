@@ -109,7 +109,7 @@ Between each consecutive orb, springs will be used to pull together two orb node
 
 Describe what your drag simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-There will be two planetary systems where the drag coefficient will be different: the usual Solar System and the Alpha Centauri System. The background color will be different for each planetary system, and there will be indicators on the screen for each system. The drag coefficient will affect the drag force being exerted on each orb, since the drag force formula ($\vec{F_{drag}} =$ $-\frac{1}{2}$ $\left|\vec{v}\right|^{2} C_{d} {\hat v}$) is being used to calculate it. This simulation will use an array of orbs.
+There will be two planetary systems where the drag coefficient will be different: the usual Solar System and the Alpha Centauri System. The background color will be different for each planetary system, and there will be indicators on the screen for each system. The drag coefficient will affect the drag force being exerted on each orb, since the drag force formula ($\vec{F}\_{drag} =$ $-\frac{1}{2}$ $\left|\vec{v}\right|^{2} C_{d} {\hat v}$) is being used to calculate it. This simulation will use an array of orbs.
 
 --- 
 
@@ -127,5 +127,8 @@ In addition, when any simulation using the electrostatic force is enabled, there
 
 Describe what your combination simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-Our combination simulation will combine the spring, drag, and electrostatic simulations. Like the spring simulation, there will be two fixed orb node, each on the left and right sides of the screen. Except since the drag simulation is involved now, each fixed orb node will be in a
-different planetary system, with the connected orb nodes to that fixed orb node experiencing a different drag force due to the drag coefficient being different for each. The electrostatic force between the orb nodes will be applied as usual. Electric field lines will also be present and act as another visual, just like the electrostatic force simulation. This simulation will use a linked list of orbs (since the three which are being combined already use a linked list).
+Our combination simulation will combine the spring, drag, and electrostatic simulations. Like the spring simulation, there will be two fixed orb nodes, each on the left and right sides of the screen. 
+
+Since the drag simulation is involved now, each fixed orb node will be in a different planetary system. The connected orb nodes to that fixed orb node experiencing a different drag force due to the drag coefficient being different for each. 
+
+The electrostatic force between the orb nodes will be applied as usual. Electric field lines will also be present and act as another visual, just like the electrostatic force simulation. This simulation will use a linked list of orbs (since the three which are being combined already use a linked list).
