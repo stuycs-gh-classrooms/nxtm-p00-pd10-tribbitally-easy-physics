@@ -51,6 +51,8 @@ void setup() {
   springSystem.populate(NUM_ORBS, true);
   combinationSystem = new OrbSpringList();
   combinationSystem.populate(NUM_ORBS, true);
+  
+  simToggles[gravitySim] = true;
 }//setup
 
 void draw() {
