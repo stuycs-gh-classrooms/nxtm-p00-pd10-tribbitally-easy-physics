@@ -143,11 +143,17 @@ class OrbArray { // OrbArray class that will control behavior of an array of orb
     }
   }
   
-  void applyDrag(float coef) {
+  void applyDrag() {
     for (int i = 0; i < orbCount; i++) {
       if (orbs[i] != null) {
-        Fdrag = orbs[i].getDragForce(coef);
-        orbs[i].applyForce(Fdrag);
+        if (orbs[i].center.y < height/2) {
+          Fdrag = orbs[i].getDragForce(D_COEF_SOLAR);
+          orbs[i].applyForce(Fdrag);
+        }
+        else if (orbs[i].center.y > height/2) {
+          Fdrag = orbs[i].getDragForce(D_COEF_ALPHA);
+          orbs[i].applyForce(Fdrag);
+        }
       }
     }
   }

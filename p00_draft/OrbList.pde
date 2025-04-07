@@ -52,10 +52,15 @@ class OrbList { // OrbList class that will control behavior of a linked list of 
     }
   }//applyGravity
   
-  void applyDrag(float coef){
+  void applyDrag(){
     OrbNode current = front;
-    while (current != null){
-      current.applyForce(current.getDragForce(coef));
+    while (current != null) {
+      if (current.center.y < height/2) {
+        current.applyForce(current.getDragForce(D_COEF_SOLAR));
+      }
+      else if (current.center.y > height/2) {
+        current.applyForce(current.getDragForce(D_COEF_ALPHA));
+      }
       current = current.next;  //loop through each item in the list and get the gravity to use in applyForce
     }
   }//applyDrag

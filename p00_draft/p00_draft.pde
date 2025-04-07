@@ -5,7 +5,8 @@ int MAX_SIZE = 60;
 float MIN_MASS = 10;
 float MAX_MASS = 100;
 float G_CONSTANT = 1;
-float D_COEF = 0.1;
+float D_COEF_SOLAR = 0.1;
+float D_COEF_ALPHA = 0.7;
 float K_CONSTANT = 8.9875 * pow(10,9); // k is coulomb's constant, which is ~8.99 * 10^9 Nm^2/C^2
 float COULOMB = 1.602 * pow(10, -4); // a real coulomb would be the constant multiplied by 10^-19 but it's too small to show any movement
 float MIN_CHARGE = -10 * COULOMB; // this will represent an object having 10 negative charges/electrons
@@ -52,6 +53,7 @@ void setup() {
 void draw() {
   background(0); // black background to simulate a solar system in space
   displayMode();
+  displayGalaxies();
   showSimulations();
   runSimulations();
 }//draw
@@ -144,18 +146,15 @@ void keyPressed() {
 
 void showSimulations() {
   if (simToggles[springSim] || simToggles[electrostaticSim] || simToggles[combinationSim]) {
-    if (simToggles[springSim]) {
+    if (simToggles[springSim] || simToggles[combinationSim]) {
       springSystem.display(true);
-    }
-    else {
-      boolean needsSprings = simToggles[combinationSim];
-      system.display(needsSprings);
-    }
-    if (toggles[MOVING]) {
-      if (simToggles[springSim]) {
+      if (toggles[MOVING]) {
         springSystem.run(toggles[BOUNCE]);
       }
-      else {
+    }
+    else {
+      system.display(false);
+      if (toggles[MOVING]) {
         system.run(toggles[BOUNCE]);
       }
     }
@@ -163,15 +162,13 @@ void showSimulations() {
   else if (simToggles[gravitySim] || simToggles[dragSim]) {
     if (simToggles[dragSim]) {
       draggedPlanets.display(false);
+      if (toggles[MOVING]) {
+        draggedPlanets.run(toggles[BOUNCE]);
+      }
     }
     else {
       bundle.display(false);
-    }
-    if (toggles[MOVING]) {
-      if (simToggles[dragSim]) {
-        draggedPlanets.run(toggles[BOUNCE]);
-      }
-      else {
+      if (toggles[MOVING]) {
         bundle.run(toggles[BOUNCE]);
       }
     }
@@ -194,25 +191,30 @@ void runSimulations() {
       springSystem.applySprings(SPRING_LENGTH, SPRING_K);
     }
     if (simToggles[dragSim]) {
-      bundle.applyDrag(D_COEF);
+      draggedPlanets.applyDrag();
     }
     if (simToggles[electrostaticSim]) {
       system.applyElectrostatic(K_CONSTANT);
     }
     if (simToggles[combinationSim]) {
-      system.applySprings(SPRING_LENGTH, SPRING_K);
-      system.applyDrag(D_COEF);
-      system.applyElectrostatic(K_CONSTANT);
+      springSystem.applySprings(SPRING_LENGTH, SPRING_K);
+      springSystem.applyDrag();
+      springSystem.applyElectrostatic(K_CONSTANT);
     }
   }//moving
 }
 
 void populateOrbs(boolean ordered) {
   if (simToggles[gravitySim] || simToggles[dragSim]) {
-    bundle = new OrbArray(NUM_ORBS, ordered);
+    if (simToggles[dragSim]) {
+      draggedPlanets = new OrbDragArray(NUM_ORBS, ordered);
+    }
+    else {
+      bundle = new OrbArray(NUM_ORBS, ordered);
+    }
   }
   else if (simToggles[springSim] || simToggles[electrostaticSim] || simToggles[combinationSim]) {
-    if (simToggles[springSim]) {
+    if (simToggles[springSim] || simToggles[combinationSim]) {
       springSystem = new OrbSpringList();
       springSystem.populate(NUM_ORBS, ordered);
     }
@@ -263,3 +265,19 @@ void displayMode() {
     simToggleX += simToggleWidth + 20; // increase the x value by the toggle width and a bit more to draw the next toggle box
   }
 }//displayMode()
+
+void displayGalaxies() {
+  fill(255);
+  textSize(20);
+  text("Solar System", 10, 15);
+
+  if (simToggles[dragSim] || simToggles[combinationSim]) {
+    strokeWeight(1);
+    stroke(78, 42, 132);
+    fill(78, 42, 132);
+    rect(0, height/2, width, height/2);
+    
+    fill(255);
+    text("Alpha Centauri", 10, height - 25);
+  }
+}
