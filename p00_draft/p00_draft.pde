@@ -30,7 +30,9 @@ String[] simModes = {"Gravity", "Spring", "Drag", "Electrostatic", "Combination"
 
 FixedOrb sun;
 OrbArray bundle;
+OrbDragArray draggedPlanets;
 OrbList system;
+OrbList springSystem;
 
 void setup() {
   size(600, 600);
@@ -38,53 +40,20 @@ void setup() {
   sun = new FixedOrb(width/2, height /2, 90, 20, 0);
   sun.c = color(255,150,0);
   
-  /** populating orbs (both the array of orbs and linked list) **/
-  bundle = new OrbArray(NUM_ORBS, true); // array of orbs is ordered by default
+  /** populating orbs (both the array of orbs and linked list, both ordered by default) **/
+  bundle = new OrbArray(NUM_ORBS, true);
+  draggedPlanets = new OrbDragArray(NUM_ORBS, true);
   system = new OrbList();
-  system.populate(NUM_ORBS, false); // linked list of orbs isn't ordered by default (ordered list doesn't move orbs for spring sim since orbs are equidistant)
+  system.populate(NUM_ORBS, true);
+  springSystem = new OrbSpringList();
+  springSystem.populate(NUM_ORBS, true);
 }//setup
 
 void draw() {
   background(0); // black background to simulate a solar system in space
   displayMode();
-  if (simToggles[springSim] || simToggles[electrostaticSim] || simToggles[combinationSim]) {
-    boolean ifSpring = simToggles[springSim] || simToggles[combinationSim];
-    system.display(ifSpring);
-    if (toggles[MOVING]) {
-      system.run(toggles[BOUNCE]);
-    }
-  }
-  else if (simToggles[gravitySim] || simToggles[dragSim]) {
-    bundle.display(false);
-    if (toggles[MOVING]) {
-      bundle.run(toggles[BOUNCE]);
-    }
-  }
-  else {
-    bundle.display(false);
-  }
-  if (simToggles[gravitySim]) {
-    sun.display();
-  }
-  if (toggles[MOVING]) {
-    if (simToggles[gravitySim]) {
-      bundle.applyGravity(sun, G_CONSTANT);
-    }
-    if (simToggles[springSim]) {
-      system.applySprings(SPRING_LENGTH, SPRING_K);
-    }
-    if (simToggles[dragSim]) {
-      bundle.applyDrag(D_COEF);
-    }
-    if (simToggles[electrostaticSim]) {
-      system.applyElectrostatic(K_CONSTANT);
-    }
-    if (simToggles[combinationSim]) {
-      system.applySprings(SPRING_LENGTH, SPRING_K);
-      system.applyDrag(D_COEF);
-      system.applyElectrostatic(K_CONSTANT);
-    }
-  }//moving
+  showSimulations();
+  runSimulations();
 }//draw
 
 void mousePressed() {
@@ -173,13 +142,84 @@ void keyPressed() {
   }
 }//keyPressed
 
+void showSimulations() {
+  if (simToggles[springSim] || simToggles[electrostaticSim] || simToggles[combinationSim]) {
+    if (simToggles[springSim]) {
+      springSystem.display(true);
+    }
+    else {
+      boolean needsSprings = simToggles[combinationSim];
+      system.display(needsSprings);
+    }
+    if (toggles[MOVING]) {
+      if (simToggles[springSim]) {
+        springSystem.run(toggles[BOUNCE]);
+      }
+      else {
+        system.run(toggles[BOUNCE]);
+      }
+    }
+  }
+  else if (simToggles[gravitySim] || simToggles[dragSim]) {
+    if (simToggles[dragSim]) {
+      draggedPlanets.display(false);
+    }
+    else {
+      bundle.display(false);
+    }
+    if (toggles[MOVING]) {
+      if (simToggles[dragSim]) {
+        draggedPlanets.run(toggles[BOUNCE]);
+      }
+      else {
+        bundle.run(toggles[BOUNCE]);
+      }
+    }
+  }
+  else {
+    bundle.display(false);
+  }
+  
+  if (simToggles[gravitySim]) {
+    sun.display();
+  }
+}
+
+void runSimulations() {
+  if (toggles[MOVING]) {
+    if (simToggles[gravitySim]) {
+      bundle.applyGravity(sun, G_CONSTANT);
+    }
+    if (simToggles[springSim]) {
+      springSystem.applySprings(SPRING_LENGTH, SPRING_K);
+    }
+    if (simToggles[dragSim]) {
+      bundle.applyDrag(D_COEF);
+    }
+    if (simToggles[electrostaticSim]) {
+      system.applyElectrostatic(K_CONSTANT);
+    }
+    if (simToggles[combinationSim]) {
+      system.applySprings(SPRING_LENGTH, SPRING_K);
+      system.applyDrag(D_COEF);
+      system.applyElectrostatic(K_CONSTANT);
+    }
+  }//moving
+}
+
 void populateOrbs(boolean ordered) {
   if (simToggles[gravitySim] || simToggles[dragSim]) {
     bundle = new OrbArray(NUM_ORBS, ordered);
   }
   else if (simToggles[springSim] || simToggles[electrostaticSim] || simToggles[combinationSim]) {
-    system = new OrbList();
-    system.populate(NUM_ORBS, ordered);
+    if (simToggles[springSim]) {
+      springSystem = new OrbSpringList();
+      springSystem.populate(NUM_ORBS, ordered);
+    }
+    else {
+      system = new OrbList();
+      system.populate(NUM_ORBS, ordered);
+    }
   }
   else {
     bundle = new OrbArray(NUM_ORBS, ordered);

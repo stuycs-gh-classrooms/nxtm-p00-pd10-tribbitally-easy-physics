@@ -8,6 +8,10 @@ class OrbArray { // OrbArray class that will control behavior of an array of orb
   PVector Fdrag; // drag force stored as a PVector variable
   PVector Fe; // electrostatic force between two charged orbs stored as a PVector variable
   
+  OrbArray() {
+    makeOrbs(NUM_ORBS, true);
+  }//default constructor (# of orbs based on driver variable and ordered by default)
+  
   OrbArray(int numOrbs, boolean ordered) {
     makeOrbs(numOrbs, ordered);
   }//OrbArray constructor

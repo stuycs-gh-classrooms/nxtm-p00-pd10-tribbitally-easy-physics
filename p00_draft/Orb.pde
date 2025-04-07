@@ -30,7 +30,7 @@ class Orb {
      acceleration = new PVector();
      setColor();
      charge = c;
-   }
+  }
 
   //movement behavior
   void move(boolean bounce) {
