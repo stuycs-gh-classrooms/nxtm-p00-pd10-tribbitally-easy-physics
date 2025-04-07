@@ -229,8 +229,12 @@ class OrbArray { // OrbArray class that will control behavior of an array of orb
   }//removeOrb
   
   void removeOrb(Orb selected) {
-    if (selected != null) { // make sure the selected orb to remove exists first
-      selected = null; // remove the selected orb
+    for (int i = 0; i < orbCount; i++) {
+      if (orbs[i] != null) {
+        if (orbs[i] == selected) {
+          orbs[i] = null;
+        }
+      }
     }
   }//removeOrb(Orb selected) -- overloaded removeOrb() method
 }
