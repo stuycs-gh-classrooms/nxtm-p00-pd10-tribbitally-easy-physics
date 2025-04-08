@@ -38,11 +38,11 @@ class OrbArray { // OrbArray class that will control behavior of an array of orb
   }//makeOrbs
 
   void display(boolean spring) {
-    for (int i = 0; i < orbCount; i++) {
-      if (orbs[i] != null) {
+    for (int i = 0; i < orbCount; i++) { // loop through the array
+      if (orbs[i] != null) { // make sure the element exists before displaying it
         orbs[i].display();
         if (spring) {
-          showSprings(i);
+          showSprings(i); // show the connected springs if in the appropriate simulation(s)
         }
       }
     }
@@ -135,28 +135,28 @@ class OrbArray { // OrbArray class that will control behavior of an array of orb
   }//applySprings    
   
   void applyGravity(Orb other, float gConstant) {
-    for (int i = 0; i < orbCount; i++) {
-      if (orbs[i] != null) {
-        Fg = orbs[i].getGravity(other, gConstant);
-        orbs[i].applyForce(Fg);
+    for (int i = 0; i < orbCount; i++) { // loop through the array
+      if (orbs[i] != null) { // make sure the Orb exists before exerting a gravitational force on it
+        Fg = orbs[i].getGravity(other, gConstant); // calculate the gravitational force between each orb and the other orb
+        orbs[i].applyForce(Fg); // apply the gravitational force
       }
     }
-  }
+  }//applyGravity
   
   void applyDrag() {
-    for (int i = 0; i < orbCount; i++) {
-      if (orbs[i] != null) {
-        if (orbs[i].center.y < height/2) {
-          Fdrag = orbs[i].getDragForce(D_COEF_SOLAR);
-          orbs[i].applyForce(Fdrag);
+    for (int i = 0; i < orbCount; i++) { // loop through the array
+      if (orbs[i] != null) { // make sure the Orb exists before exerting a drag force on it
+        if (orbs[i].center.y < height/2) { // if the orb is in the Solar System
+          Fdrag = orbs[i].getDragForce(D_COEF_SOLAR); // calculate the drag force
+          orbs[i].applyForce(Fdrag); // apply the drag force
         }
-        else if (orbs[i].center.y > height/2) {
-          Fdrag = orbs[i].getDragForce(D_COEF_ALPHA);
-          orbs[i].applyForce(Fdrag);
+        else if (orbs[i].center.y > height/2) { // if the orb is in the Alpha Centauri system
+          Fdrag = orbs[i].getDragForce(D_COEF_ALPHA); // calculate the drag force
+          orbs[i].applyForce(Fdrag); // apply the drag force
         }
       }
     }
-  }
+  }//applyDrag
   
   void applyElectrostatic(float kConstant) {
     for (int i = 0; i < orbCount; i++) {
@@ -184,29 +184,29 @@ class OrbArray { // OrbArray class that will control behavior of an array of orb
         }
       }
     }
-  }
+  }//applyElectrostatic
   
   void run(boolean bounce) {
-    for (int i = 0; i < orbCount; i++) {
-      if (orbs[i] != null) {
-        orbs[i].move(bounce);
+    for (int i = 0; i < orbCount; i++) { // loop through the array
+      if (orbs[i] != null) { // make sure the element exists before moving it (and bouncing it)
+        orbs[i].move(bounce); // move the element (and bounce it depending on the boolean value)
       }
     }
-  }
+  }//run
   
   Orb getSelected(int x, int y) {
-    for (int i = 0; i < orbCount; i++) {
-      if (orbs[i] != null) {
+    for (int i = 0; i < orbCount; i++) { // loop through the array
+      if (orbs[i] != null) { // make sure the element exists before selecting it
         if (orbs[i].isSelected(x, y)) {
-          return orbs[i];
+          return orbs[i]; // return the Orb that is selected
         }
         else {
           continue;
         }
       }
     }
-    return null;
-  }
+    return null; // otherwise, return null
+  }//getSelected
   
   void addOrb() {
     for (int i = 0; i < orbCount; i++) { // go through each orb in the orbs array
@@ -229,12 +229,12 @@ class OrbArray { // OrbArray class that will control behavior of an array of orb
   }//removeOrb
   
   void removeOrb(Orb selected) {
-    for (int i = 0; i < orbCount; i++) {
-      if (orbs[i] != null) {
+    for (int i = 0; i < orbCount; i++) { // loop through the array
+      if (orbs[i] != null) { // make sure the element exists before removing it
         if (orbs[i] == selected) {
-          orbs[i] = null;
+          orbs[i] = null; // remove the element
         }
       }
     }
   }//removeOrb(Orb selected) -- overloaded removeOrb() method
-}
+}//OrbArray

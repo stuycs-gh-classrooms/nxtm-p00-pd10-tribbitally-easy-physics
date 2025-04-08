@@ -1,4 +1,4 @@
-class FixedOrb extends Orb {
+class FixedOrb extends Orb { // FixedOrb is a subclass of Orb -- basically an Orb that doesn't change position
 
   FixedOrb(float x, float y, float s, float m, float c) {
     super(x, y, s, m, c);
