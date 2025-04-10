@@ -44,4 +44,24 @@ class OrbDragArray extends OrbArray {
     PVector initVel = new PVector(initVelX, initVelY);
     return initVel;
   }//initVelocity
+  
+  void addOrb() {
+    for (int i = 0; i < orbCount; i++) { // go through each orb in the orbs array
+      if (orbs[i] == null) {
+        orbs[i] = new Orb(); // initialize a new orb if the current one doesn't exist (set to null)
+        if (toggles[MOVING]) {
+          orbs[i].velocity = initVelocity(); // set each of the orbs' velocity to an initial random velocity when moving is toggled on
+        }
+      }
+      else if (orbs[i] != null) {
+        break; // if the current orb doesn't exist, then break out of the loop and continue to the following code in the method
+      }
+    }
+    orbCount++; // increase the number of orbs by 1
+    addedOrbs = new Orb[orbCount]; // initialize the array that will contain the added orb
+    arrayCopy(orbs, 0, addedOrbs, 0, orbCount - 1); // copy over the existing elements from the orbs array to the new addedOrbs array
+    addedOrbs[orbCount - 1] = new Orb(); // initalize a new orb as the last element in the new array (i.e. appending to the array)
+    addedOrbs[orbCount - 1].velocity = initVelocity(); // initializing a random velocity for a newly added orb fixes bug where they wouldn't move even when moving toggled on
+    orbs = addedOrbs; // set the orbs array to be the new addedOrbs array
+  }//addOrb -- overridden from OrbArray class
 }//OrbArray
